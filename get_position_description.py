@@ -8,7 +8,6 @@ import os
 
 
 def get_job_description(company_id):
-    print(company_id)
     job_url = 'https://www.lagou.com/jobs/%s.html' % str(company_id)
     response = requests.get(job_url, headers=headers, timeout=10)
     if response.status_code == 200:
@@ -27,10 +26,7 @@ def get_job_description(company_id):
 
 def get_all_jobs_description(xlsx_file):
     list_id = get_company_ids(xlsx_file)
-    # for testing
-    list_id = list_id[0: 4]
     info = []
-    print(list_id)
     for _id in list_id:
         desc = get_job_description(_id)
         if desc:
