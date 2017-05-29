@@ -43,3 +43,22 @@ def random_time_sleep(base_time=20, max_randint=20):
     '''
     sleep_sec = base_time + random.randint(0, max_randint)
     time.sleep(sleep_sec)
+
+
+def check_contain_chinese(check_str):
+    for ch in check_str:
+        if u'\u4e00' <= ch <= u'\u9fff':
+            return True
+    return False
+
+
+def set_show_Chinese():
+    from pylab import mpl
+    mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
+    mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+
+
+add_words = ['数据库', '分布式']
+stop_words = ['CTO', 'CEO']
+
+no_title_words = ['DBA', 'uWsgi', 'MQ', 'PHP']
