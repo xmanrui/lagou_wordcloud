@@ -3,7 +3,7 @@ from openpyxl import load_workbook
 import os
 
 
-def get_company_id(xlsx_file):
+def get_company_ids(xlsx_file):
     basename = os.path.basename(xlsx_file)
     str_split = basename.split('_')
     lang_name = str_split[0]
@@ -17,7 +17,7 @@ def get_company_id(xlsx_file):
 
 def test_get_company_id():
     test_file = './xlsx_file/python_position_info.xlsx'
-    a = get_company_id(test_file)
+    a = get_company_ids(test_file)
     print(a)
 
 if __name__ == '__main__':
