@@ -1,5 +1,6 @@
 import time
 import random
+import os
 
 headers = {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
            'Accept-Encoding': 'gzip, deflate',
@@ -57,6 +58,11 @@ def set_show_Chinese():
     mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
     mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
 
+
+def get_job_type_from_position_info_xlsx(xlsx_file):
+    str_split = os.path.basename(xlsx_file).split('_')
+    job_type = str_split[0]
+    return job_type
 
 add_words = ['数据库', '分布式']
 stop_words = ['CTO', 'CEO']
