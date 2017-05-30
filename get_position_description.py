@@ -9,6 +9,7 @@ import os
 
 def get_job_description(company_id):
     job_url = 'https://www.lagou.com/jobs/%s.html' % str(company_id)
+    print('crawl:', job_url)
     response = requests.get(job_url, headers=headers, timeout=10)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html5lib')
@@ -36,8 +37,14 @@ def get_all_jobs_description(xlsx_file):
     return info
 
 
-if __name__ == '__main__':
+def test_get_all_jobs_description():
+    job_type = 'python'
+    xlsx_file = 'xlsx_file/%s_position_info.xlsx' % job_type
     d = os.path.dirname(__file__)
-    xlsx = os.path.join(d, 'xlsx_file/python_position_info.xlsx')
+    xlsx = os.path.join(d, xlsx_file)
     r = get_all_jobs_description(xlsx)
     print(r)
+
+
+if __name__ == '__main__':
+    test_get_all_jobs_description()
