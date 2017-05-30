@@ -28,35 +28,35 @@ def get_json(url, page_number, lang_name):
         info.append(i['companySize'])
         info.append(i['district'])
         info.append(i['financeStage'])
-        info.append(i['companySize'])
+        info.append(i['businessZones'])
         info.append(i['positionId'])
         info_list.append(info)
     return info_list
 
 
-def main(city_name, lang_name):
-    lang_name = lang_name.lower()
+def main(city_name, job_type):
+    job_type = job_type.lower()
     page = 1
     # url = 'http://www.lagou.com/jobs/positionAjax.json?needAddtionalResult=false'
     city_quote = quote(city_name)
     url = 'https://www.lagou.com/jobs/positionAjax.json?needAddtionalResult=false&city=%s' % city_quote
     info_result = []
     while page < 10:
-        info = get_json(url, page, lang_name)
+        info = get_json(url, page, job_type)
         info_result += info
         page += 1
         # 如果暂停的时间一样会被拒绝访问， 所以修改为随机值，每次都不一样绕开反爬虫策略
         time.sleep(20 + random.randint(0, 20))
     wb = Workbook()
     ws1 = wb.active
-    ws1.title = lang_name
+    ws1.title = job_type
     for row in info_result:
         ws1.append(row)
-    wb.save('./xlsx_file/%s_position_info.xlsx' % lang_name)
+    wb.save('./xlsx_file/%s_position_info.xlsx' % job_type)
 
 
 if __name__ == '__main__':
-    lang = 'python'
+    job = '运营'
     city = '深圳'
-    main(city, lang)
+    main(city, job)
     print('end')
