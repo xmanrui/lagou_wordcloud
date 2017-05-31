@@ -64,7 +64,10 @@ def get_job_type_from_position_info_xlsx(xlsx_file):
     job_type = str_split[0]
     return job_type
 
-add_words = ['数据库', '分布式']
+add_words = ['数据库', '分布式', '设计模式', '面向对象', '网络编程', '算法', '数据结构',
+        '正则表达式', '敏捷', '单元测试', '并发', '微服务', '集群', '机器学习', 'C++', 'C#', '高性能', '高并发',
+        '后台', '前端', '运维', '消息队列', '数据分析', '数据挖掘', '游戏', '大数据', '云计算', '中间件']
+
 stop_words = ['CTO', 'CEO']
 
 no_title_words = ['DBA', 'uWsgi', 'MQ', 'PHP']
