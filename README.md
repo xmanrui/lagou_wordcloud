@@ -6,3 +6,6 @@
 
 * 工资词云图
 <div align=center><img src="img_wordcloud/python_salary_wordcloud.png" width = "50%" /></div>
+
+* 公司区域分布词语图
+<div align=center><img src="img_wordcloud/python_district_wordcloud.png" width = "50%" /></div>
