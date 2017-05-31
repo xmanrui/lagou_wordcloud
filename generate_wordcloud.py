@@ -59,6 +59,7 @@ def generate_skill_wordcloud(xlsx_file):
     job_type = get_job_type_from_position_info_xlsx(xlsx_file)
     desc = get_all_jobs_description(xlsx_file)
     text = ''.join(desc)
+    [jieba.add_word(word) for word in add_words]
     seg = jieba.cut(text, cut_all=False, HMM=True)
     seg = filter(filter_fun(job_type), seg)
     seg = [s.title() for s in seg]
@@ -120,8 +121,8 @@ if __name__ == '__main__':
     job = 'python'
     xlsx = './xlsx_file/%s_position_info.xlsx' % job
     print(job)
-    # generate_skill_wordcloud(xlsx)
+    generate_skill_wordcloud(xlsx)
     # generate_salary_worlcloud(xlsx)
     # generate_district_wordcloud(xlsx)
-    generate_industry_field_wordcloud(xlsx)
+    # generate_industry_field_wordcloud(xlsx)
     print('end!!!', job)
