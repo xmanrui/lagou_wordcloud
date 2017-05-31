@@ -4,7 +4,15 @@ from pprint import pprint
 import time
 import random
 from urllib.parse import quote
-from common import headers, cookies
+from common import headers, cookies, random_time_sleep
+
+
+def list_info_convert_str(info):
+    if isinstance(info, list):
+        str_info = ' '.join(info)
+        return str_info
+
+    return info
 
 
 def get_json(url, page_number, lang_name):
@@ -13,23 +21,24 @@ def get_json(url, page_number, lang_name):
     proxies = {'http': 'http://222.169.193.162:8099'}
 
     json = requests.post(url, data, proxies=proxies, headers=headers, cookies=cookies).json()
+    pprint(json)
     list_companies = json['content']['positionResult']['result']
     pprint(list_companies)
     info_list = []
     for i in list_companies:
         info = list()
-        info.append(i['companyShortName'])
-        info.append(i['positionName'])
-        info.append(i['city'])
-        info.append(i['industryField'])
-        info.append(i['salary'])
-        info.append(i['education'])
-        info.append(i['workYear'])
-        info.append(i['companySize'])
-        info.append(i['district'])
-        info.append(i['financeStage'])
-        info.append(i['businessZones'])
-        info.append(i['positionId'])
+        info.append(list_info_convert_str(i['companyShortName']))
+        info.append(list_info_convert_str(i['positionName']))
+        info.append(list_info_convert_str(i['city']))
+        info.append(list_info_convert_str(i['industryField']))
+        info.append(list_info_convert_str(i['salary']))
+        info.append(list_info_convert_str(i['education']))
+        info.append(list_info_convert_str(i['workYear']))
+        info.append(list_info_convert_str(i['companySize']))
+        info.append(list_info_convert_str(i['district']))
+        info.append(list_info_convert_str(i['financeStage']))
+        info.append(list_info_convert_str(i['businessZones']))
+        info.append(list_info_convert_str(i['positionId']))
         info_list.append(info)
     return info_list
 
@@ -46,7 +55,7 @@ def main(city_name, job_type):
         info_result += info
         page += 1
         # 如果暂停的时间一样会被拒绝访问， 所以修改为随机值，每次都不一样绕开反爬虫策略
-        time.sleep(20 + random.randint(0, 20))
+        random_time_sleep(20, 20)
     wb = Workbook()
     ws1 = wb.active
     ws1.title = job_type
@@ -56,7 +65,7 @@ def main(city_name, job_type):
 
 
 if __name__ == '__main__':
-    job = '运营'
+    job = 'python'
     city = '深圳'
     main(city, job)
     print('end')
