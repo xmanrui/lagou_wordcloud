@@ -33,6 +33,12 @@ def get_district(xlsx_file):
     return list(district_list)
 
 
+def get_business_zones(xlsx_file):
+    zones = get_common(xlsx_file, 'K')
+    zones = filter(lambda x: x, zones)
+    return list(zones)
+
+
 def test_get_company_id():
     test_file = './xlsx_file/python_position_info.xlsx'
     a = get_company_ids(test_file)
@@ -44,6 +50,13 @@ def test_get_district():
     a = get_district(test_file)
     print(a)
 
+
+def test_get_business_zones():
+    test_file = './xlsx_file/python_position_info.xlsx'
+    a = get_business_zones(test_file)
+    print(a)
+
 if __name__ == '__main__':
     # test_get_company_id()
-    test_get_district()
+    # test_get_district()
+    test_get_business_zones()
