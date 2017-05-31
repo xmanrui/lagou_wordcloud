@@ -5,7 +5,7 @@ from get_position_description import get_all_jobs_description
 from common import check_contain_chinese, add_words, set_show_Chinese, get_job_type_from_position_info_xlsx
 import jieba
 from openpyxl import load_workbook
-from read_position_info import get_salary_list, get_district, get_business_zones
+from read_position_info import get_salary_list, get_district, get_business_zones, get_industry_field
 
 set_show_Chinese()
 font = './font/SourceHanSerifSC-Regular.otf'
@@ -102,11 +102,26 @@ def generate_district_wordcloud(xlsx_file):
 
     wc.to_file('./img_wordcloud/%s_district_wordcloud.png' % job_type)
 
+
+def generate_industry_field_wordcloud(xlsx_file):
+    job_type = get_job_type_from_position_info_xlsx(xlsx_file)
+    industry = get_industry_field(xlsx_file)
+    text = ' '.join(industry)
+    wc = WordCloud(collocations=False, font_path=font, width=1400, height=1400, margin=2, max_words=200).generate(text)
+    plt.imshow(wc)
+    plt.title('%s 行业词云图' % job_type, fontsize=20)
+    plt.axis("off")
+    plt.show()
+
+    wc.to_file('./img_wordcloud/%s_industry_field_wordcloud.png' % job_type)
+
+
 if __name__ == '__main__':
     job = 'python'
     xlsx = './xlsx_file/%s_position_info.xlsx' % job
     print(job)
-    #generate_skill_wordcloud(xlsx)
-    #generate_salary_worlcloud(xlsx)
-    generate_district_wordcloud(xlsx)
+    # generate_skill_wordcloud(xlsx)
+    # generate_salary_worlcloud(xlsx)
+    # generate_district_wordcloud(xlsx)
+    generate_industry_field_wordcloud(xlsx)
     print('end!!!', job)
