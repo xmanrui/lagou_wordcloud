@@ -39,6 +39,17 @@ def get_business_zones(xlsx_file):
     return list(zones)
 
 
+def get_industry_field(xlsx_file):
+    fields = get_common(xlsx_file, 'D')
+    fields = filter(lambda x: x, fields)
+    fields = list(fields)
+    result = list()
+    # 把 "移动互联网,生活服务" 拆成[移动互联网,生活服务]
+    [result.extend(item.split(',')) for item in fields]
+
+    return result
+
+
 def test_get_company_id():
     test_file = './xlsx_file/python_position_info.xlsx'
     a = get_company_ids(test_file)
@@ -56,7 +67,14 @@ def test_get_business_zones():
     a = get_business_zones(test_file)
     print(a)
 
+
+def test_get_industry_field():
+    test_file = './xlsx_file/python_position_info.xlsx'
+    a = get_industry_field(test_file)
+    print(a)
+
 if __name__ == '__main__':
     # test_get_company_id()
     # test_get_district()
-    test_get_business_zones()
+    # test_get_business_zones()
+    test_get_industry_field()
