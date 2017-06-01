@@ -1,6 +1,5 @@
 # -*- coding-8 -*-
 from openpyxl import load_workbook
-import os
 from common import get_job_type_from_position_info_xlsx
 
 
