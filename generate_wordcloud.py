@@ -30,6 +30,14 @@ def filter_it_job(x):
     return flag
 
 
+def simple_filter(x):
+    flag = not x.isspace() and x.isprintable()
+    flag = flag and not x.isnumeric() and not x.isdecimal() and not x.isdigit()
+    flag = flag and len(x) > 1
+
+    return flag
+
+
 def is_it_job(job_type):
     '''
     包含中文的是非it工作（如产品，运行), it工作指Python、C++、Java等，暂时不考虑HR之类的工作。
@@ -42,6 +50,7 @@ def is_it_job(job_type):
 
 
 def filter_fun(job_type):
+    return simple_filter  # 目前先返回simple_filter
     '''
     返回it工作或者非it工作的过滤函数
     由于it工作或者非it工作的职位信息分词不一样，it工作的职位信息分词主要是英文如Linux,Git,NoSQL等所以
@@ -53,6 +62,8 @@ def filter_fun(job_type):
         return filter_it_job
     else:
         return filter_not_it_job
+
+
 
 
 def generate_skill_wordcloud(xlsx_file):
@@ -118,11 +129,11 @@ def generate_industry_field_wordcloud(xlsx_file):
 
 
 if __name__ == '__main__':
-    job = 'python'
+    job = 'c++'
     xlsx = './xlsx_file/%s_position_info.xlsx' % job
     print(job)
-    generate_skill_wordcloud(xlsx)
-    # generate_salary_worlcloud(xlsx)
-    # generate_district_wordcloud(xlsx)
-    # generate_industry_field_wordcloud(xlsx)
+    # generate_skill_wordcloud(xlsx)
+    #generate_salary_worlcloud(xlsx)
+    #generate_district_wordcloud(xlsx)
+    generate_industry_field_wordcloud(xlsx)
     print('end!!!', job)
