@@ -34,6 +34,6 @@
 * 3.statistics.py模块用于数值统计
    * calulate_average_salary()函数用于计算工资的平均最低限和平均最高限；
    
-* 联系方式：
+# 联系方式：
   * 博客：http://blog.csdn.net/xiemanr
   * 邮箱：xiemanrui@foxmail.com
