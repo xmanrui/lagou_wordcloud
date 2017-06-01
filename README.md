@@ -54,7 +54,10 @@ opengl: 11.00k - 22.00k
 嵌入式: 10.83k - 18.65k  
 c#: 9.92k - 16.84k  
 测试: 9.91k - 16.70k  
-运营: 8.50k - 14.42k  
+运营: 8.50k - 14.42k    
+   * 各岗位工资上下限柱状图
+<div align=center><img src="img_wordcloud/salary_histogram.png" width = "50%" /></div>
+
    
 # 联系方式：
   * 博客：http://blog.csdn.net/xiemanr
