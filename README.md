@@ -13,6 +13,8 @@
 * Python行业词云图
  <div align=center><img src="img_wordcloud/python_industry_field_wordcloud.png" width = "50%" /></div>
 
+* 其它职位的词云图见img_wordcloud文件夹。
+
 # 使用
 ## 安装
 * 1.安装Python3
