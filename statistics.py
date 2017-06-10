@@ -8,6 +8,7 @@ from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 set_show_Chinese()
 
+
 def calculate_average_salary(xlsx_file):
     salary_list = get_salary_list(xlsx_file)
     text = ' '.join(salary_list)
@@ -50,19 +51,16 @@ def plot_average_salary_histogram(job_list):
     [print('%s: %0.2fk - %0.2fk' % (x[0], x[1], x[2])) for x in sorted(r[:], key=lambda y: y[2], reverse=True)]
     y_max = r_copy[0][2] + 5
     opacity = 0.8
-    bar_width = 0.7
+    bar_width = 1
     index = np.arange(0, len(r)*2, 2)
-
+    fig = plt.figure(figsize=(14, 6))
     ymajor_locator = MultipleLocator(2)  # 将y轴主刻度标签设置为2的倍数
     # ymajor_formatter = FormatStrFormatter('%1.1f')  # 设置y轴标签文本的格式
     yminor_locator = MultipleLocator(0.5)  # 将此y轴次刻度标签设置为0.5的倍数
-    ax = plt.gca()
+    ax = fig.gca()
     ax.yaxis.set_major_locator(ymajor_locator)
     ax.yaxis.set_minor_locator(yminor_locator)
-
     # ax.yaxis.set_major_formatter(ymajor_formatter)
-    #plt.bar(index, lower_limits, bar_width, alpha=opacity, color='b', label='下限平均值')
-    #plt.bar(index + bar_width, upper_limits, bar_width, alpha=opacity, color='r', label='上限平均值')
 
     plt.bar(index + bar_width/2, offset_list, bar_width, bottom=lower_limits, alpha=opacity, color='r')
 
@@ -70,24 +68,22 @@ def plot_average_salary_histogram(job_list):
         lower = '%0.1fk' % r[i][1]
         upper = '%0.1fk' % r[i][2]
         offset = bar_width/5 * 2
-        plt.text(v + offset, r[i][1] - 1, lower)
+        plt.text(v + offset, r[i][1] - 1.5, lower)
         plt.text(v + offset, r[i][2] + 0.5, upper)
 
     plt.xlabel('职位')
     plt.ylabel('工资')
-    plt.title('工资上下限平均值')
+    plt.title('拉勾 工资上下限平均值')
     plt.xticks(index + bar_width, jobs)
     plt.ylim(0, y_max)
     plt.grid(True, axis='y')
     plt.legend()
     plt.savefig('./img_wordcloud/salary_histogram.png')
-
-    plt.tight_layout()
     plt.show()
 
 
 def test_calculate_average_salary():
-    job_list1 = ['java', 'python', 'c++', 'c#', 'cocos2d-x', 'unity3d', '安卓', '前端', 'ios', 'opengl']
+    job_list1 = ['爬虫', '算法', 'php', 'java', 'python', 'c++', 'c#', 'cocos2d-x', 'unity3d', '安卓', '前端', 'ios',  '测试']
     # job_list = ['爬虫', '测试', '嵌入式', 'JavaScript', '自然语言处理', '数据挖掘', '机器学习', '大数据', '产品', '需求', '运营']
     # job_list.extend(job_list1)
     plot_average_salary_histogram(job_list1)
