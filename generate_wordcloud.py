@@ -50,7 +50,7 @@ def is_it_job(job_type):
 
 
 def filter_fun(job_type):
-    return simple_filter  # 目前先返回simple_filter
+    return filter_it_job  # 目前先返回filter_it_job
     '''
     返回it工作或者非it工作的过滤函数
     由于it工作或者非it工作的职位信息分词不一样，it工作的职位信息分词主要是英文如Linux,Git,NoSQL等所以
