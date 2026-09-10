@@ -5,6 +5,7 @@ from common import headers, random_time_sleep
 from bs4 import BeautifulSoup
 from read_position_info import get_company_ids
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def get_job_description(company_id):
@@ -28,11 +29,17 @@ def get_job_description(company_id):
 def get_all_jobs_description(xlsx_file):
     list_id = get_company_ids(xlsx_file)
     info = []
-    for _id in list_id:
-        desc = get_job_description(_id)
-        if desc:
-            info.extend(desc)
-        random_time_sleep(3, 7)
+
+    def crawl_job(company_id):
+        desc = get_job_description(company_id)
+        return desc if desc else []
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(crawl_job, _id) for _id in list_id]
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                info.extend(result)
 
     return info
 
